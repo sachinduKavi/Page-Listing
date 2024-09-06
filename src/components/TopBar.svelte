@@ -17,7 +17,9 @@
             
         </div>
 
-        <div class="profile"></div>
+        <div class="profile">
+            <img src="assets/images/user.png" alt="" width="100%">
+        </div>
     </div>
     
     
@@ -32,6 +34,7 @@
         aspect-ratio: 1;
         border-radius: 100%;
         margin: 0 0 0 30px;
+        overflow: hidden;
     }
 
     .top-heading {
@@ -45,6 +48,7 @@
         align-items: center;
         max-height: min-content;
         padding: 5px;
+        
         /* background-color: blue; */
     }
     
