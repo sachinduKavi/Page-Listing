@@ -11,12 +11,16 @@
     
     let productList = []
     let categoryList = []
-    let gridState = false // Grid state variable
+    let legendaryProducts = []
+    let gridState = true // Grid state variable
 
 
     const loadProducts = async () => {
         const response = await getProductList()
-        console.log(response)
+        categoryList = response.data.products.map(element => {
+            return element.category
+        })
+        categoryList = [...new Set(categoryList)]
         if(response.status === 200) {
             productList = response.data.products.map(element => {
                 return {
@@ -31,13 +35,21 @@
                 }
             });
 
+            legendaryProducts = productList
+
         }
     }
 
-
+    // Toggle between grid and list layouts
     const toggleGridState = (state) => {
-        console.log(state)
         gridState = state
+    }
+
+    // Category filtering 
+    const filterCategory = (e) => {
+        const categories = new Set(e.detail);
+        productList = legendaryProducts.filter(product => categories.has(product.category));
+        console.log('product list', productList)
     }
 
     
@@ -56,7 +68,7 @@
 
 
     <div class='content-layout'>
-        <Filter/>
+        <Filter {categoryList} on:filterCategory={filterCategory}/>
 
         {#if gridState}
         <ItemLayout {productList}/>

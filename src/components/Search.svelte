@@ -1,7 +1,7 @@
 <script>
     export let toggleGridState
     export let gridState = false;
-    console.log(gridState)
+ 
     // import GridIcon from './../assets/icons/grid.png';
     
     let searchKey = ""

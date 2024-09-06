@@ -1,5 +1,20 @@
 <script>
+    export let categoryList
+    import {createEventDispatcher} from 'svelte'
 
+    const dispatch = createEventDispatcher()
+
+    let categoryStatus = []
+
+
+    const checkChange = () => {
+        if(categoryStatus.length <= 0) {
+            dispatch('filterCategory', categoryList)
+        } else {
+            dispatch('filterCategory', categoryStatus)
+        }
+        
+    }
 </script>
 
 
@@ -12,23 +27,22 @@
 
     <h3>Category</h3>
         <ul type='none' class="list">
-            <li><input type="checkbox"> Electronics</li>
-            <li><input type="checkbox"> Beauty</li>
-            <li><input type="checkbox"> Gross</li>
-            <li><input type="checkbox"> Electronics</li>
+            {#each categoryList as category}
+            <li><input type="checkbox" value={category} bind:group={categoryStatus} on:change={checkChange}> {category.charAt(0).toUpperCase() + category.slice(1)}</li>
+            {/each}
+            
         </ul>
 
         <h3>Price Range</h3>
-        <ul type='none' class="list">
-            <li><input type="checkbox"> Electronics</li>
-            <li><input type="checkbox"> Beauty</li>
-            <li><input type="checkbox"> Gross</li>
-            <li><input type="checkbox"> Electronics</li>
-        </ul>
+        <input type="range" class="price-range">
 </div>
 
 
 <style>
+
+    .price-range {
+        width: 100%;
+    }
     h3 {
         margin-top: 15px;
     }

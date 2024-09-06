@@ -55,5 +55,6 @@
         max-width: calc(100%);
         overflow-y: hidden;
         flex-wrap: wrap;
+        height: fit-content;
     }
 </style>
