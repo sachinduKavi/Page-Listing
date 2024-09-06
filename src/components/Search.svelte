@@ -1,4 +1,7 @@
 <script>
+    export let toggleGridState
+    export let gridState = false;
+    console.log(gridState)
     // import GridIcon from './../assets/icons/grid.png';
     
     let searchKey = ""
@@ -16,12 +19,16 @@
     </div>
 
    
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="layout-formatter">
-            <div class="min-con">
+           
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div class="min-con {gridState? 'selected': ''}" on:click={() => {toggleGridState(true)}}>
                 <img src="./assets/icons/grid.png" alt="load failed">
             </div>
             
-            <div class="min-con">
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div class="min-con {!gridState? 'selected': ''}" on:click={() => {toggleGridState(false)}}>
                 <img src="./assets/icons/lines3.png" alt="load failed">
             </div>
         </div>
@@ -63,6 +70,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding: 10px;
     }
     
 
