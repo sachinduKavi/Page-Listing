@@ -6,6 +6,7 @@
     import Filter from '../components/Filter.svelte';
     import ItemLayout from '../components/ItemLayout.svelte';
     import ItemLayout02 from '../components/ItemLayout02.svelte';
+    import Footer from '../components/Footer.svelte';
 
     import {getProductList} from '../queries/listPageQuery.js'
     
@@ -13,6 +14,9 @@
     let categoryList = []
     let legendaryProducts = []
     let gridState = true // Grid state variable
+    let maxValue = 0
+    let tempCategoryList = []
+    let isLoading = true
 
 
     const loadProducts = async () => {
@@ -21,8 +25,10 @@
             return element.category
         })
         categoryList = [...new Set(categoryList)]
+        tempCategoryList = categoryList
         if(response.status === 200) {
             productList = response.data.products.map(element => {
+                if(maxValue < element.price) maxValue = element.price
                 return {
                     id: element.id,
                     title: element.title,
@@ -38,6 +44,7 @@
             legendaryProducts = productList
 
         }
+        isLoading = false
     }
 
     // Toggle between grid and list layouts
@@ -47,11 +54,23 @@
 
     // Category filtering 
     const filterCategory = (e) => {
-        const categories = new Set(e.detail);
-        productList = legendaryProducts.filter(product => categories.has(product.category));
-        console.log('product list', productList)
+        const categories = new Set(e.detail)
+        tempCategoryList = e.details
+        productList = legendaryProducts.filter(product => {
+            return categories.has(product.category)
+        });
+       
     }
 
+    // FIlter according to the product price
+    const filterPrice = (price) => {
+        let tempCat = new Set(tempCategoryList)
+        productList = legendaryProducts.filter(element => {
+            console.log(element.price <= price.detail && tempCat.has(element.category))
+            console.log(price.detail, element.price)
+            return element.price <= price.detail && tempCat.has(element.category)
+        })
+    }
     
 
     onMount(() => {
@@ -66,9 +85,9 @@
 
     <Search {toggleGridState} {gridState}/>
 
-
+    {#if !isLoading}
     <div class='content-layout'>
-        <Filter {categoryList} on:filterCategory={filterCategory}/>
+        <Filter {categoryList} {maxValue} on:filterCategory={filterCategory} on:filterPrice={filterPrice} {productList}/>
 
         {#if gridState}
         <ItemLayout {productList}/>
@@ -76,6 +95,9 @@
         <ItemLayout02 {productList}/>
         {/if}
     </div>
+    {/if}
+
+    <Footer/>
 
 </div>
 

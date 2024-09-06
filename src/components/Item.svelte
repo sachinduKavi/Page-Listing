@@ -38,6 +38,7 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 0 10px;
+        flex: 1 1 0;
     }
 
     .details h3 {

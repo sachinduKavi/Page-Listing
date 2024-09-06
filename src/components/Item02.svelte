@@ -111,10 +111,16 @@
         height: 350px;
         background-color: white;
         max-width: 1200px;
+        cursor: pointer;
         margin: 10px;
         display: flex;
         flex-direction: row;
         padding: 2%;
+    }
+
+    .item-02-border:hover {
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.082);
+        transition: box-shadow 0.3s;
     }
 
     .item-02-border .image-wrapper {

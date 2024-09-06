@@ -1,10 +1,15 @@
 <script>
-    export let categoryList
-    import {createEventDispatcher} from 'svelte'
-
+    import {createEventDispatcher, onMount} from 'svelte'
     const dispatch = createEventDispatcher()
 
+    export let categoryList, productList = []
+    let maxValue = 0, range = 0
     let categoryStatus = []
+    
+    productList.forEach(element => {
+        if(element.price > maxValue) maxValue = element.price
+    })
+    range = maxValue
 
 
     const checkChange = () => {
@@ -19,6 +24,8 @@
 
 
 
+<!-- svelte-ignore non-top-level-reactive-declaration -->
+<!-- svelte-ignore non-top-level-reactive-declaration -->
 <div class="filter-outline">
     <h2>Filter By</h2>
 
@@ -33,8 +40,10 @@
             
         </ul>
 
-        <h3>Price Range</h3>
-        <input type="range" class="price-range">
+        <h3>Price Range ${range.toFixed(2)}</h3>
+        <input type="range" class="price-range"  min="0" bind:value={range} max={maxValue} on:change={(e) => {
+            dispatch('filterPrice', e.target.value)
+        }}>
 </div>
 
 

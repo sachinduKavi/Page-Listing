@@ -55,6 +55,12 @@ button {
 	color: #333;
 	background-color: #f4f4f4;
 	outline: none;
+	cursor: pointer;
+}
+
+button:active {
+	box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.082);
+	transition: box-shadow 0.3s;
 }
 
 button:disabled {

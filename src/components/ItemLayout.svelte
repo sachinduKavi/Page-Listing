@@ -1,11 +1,10 @@
 <script>
-    export let productList = []
-    console.log(productList, productList.length)
-
   import { onMount } from "svelte";
   import Item from "./Item.svelte";
 
-  
+  export let productList = []
+
+    
 
     let singleWidth
     onMount(() => {
@@ -23,10 +22,7 @@
     
     <div class="row">
     {#each productList as product}
-        
-        
             <Item {singleWidth} {product} />
-        
     {/each}
 
     </div>
