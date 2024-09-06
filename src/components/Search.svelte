@@ -23,12 +23,12 @@
         <div class="layout-formatter">
            
             <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <div class="min-con {gridState? 'selected': ''}" on:click={() => {toggleGridState(true)}}>
+            <div class="min-con" on:click={() => {toggleGridState(true)}} class:selected={gridState}>
                 <img src="./assets/icons/grid.png" alt="load failed">
             </div>
             
             <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <div class="min-con {!gridState? 'selected': ''}" on:click={() => {toggleGridState(false)}}>
+            <div class="min-con" on:click={() => {toggleGridState(false)}} class:selected={!gridState}>
                 <img src="./assets/icons/lines3.png" alt="load failed">
             </div>
         </div>
