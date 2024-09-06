@@ -16,11 +16,11 @@
 
         <div class="row">
             <div class="cell">
-                <p>Category: {product.category.charAt(0).toUpperCase() + product.category.slice(1)}</p>
+                <h5>Category: {product.category.charAt(0).toUpperCase() + product.category.slice(1)}</h5>
             </div>
            
             <div class="cell">
-                <p>Brand: {product.brand}</p>
+                <h5>Brand: {product.brand}</h5>
             </div>
             
         </div>
@@ -70,7 +70,7 @@
 
     .description p {
         text-align: left;
-        font-size: 21px;
+        font-size: 18px;
         font-weight: bold;
         color: #847c7ccb;
     }
@@ -89,7 +89,7 @@
     .product-details {
         flex: 1 1 0;  
         display: flex;
-        
+        justify-content: space-between;
         padding: 10px;
         align-items: flex-start;
         flex-direction: column;
