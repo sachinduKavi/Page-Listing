@@ -7,10 +7,27 @@
     import ItemLayout from '../components/ItemLayout.svelte';
 
     import {getProductList} from '../queries/listPageQuery.js'
-  
+    
+    let productList = []
+    let categoryList = []
     const loadProducts = async () => {
         const response = await getProductList()
         console.log(response)
+        if(response.status === 200) {
+            response.data.products.forEach(element => {
+                productList.push({
+                    id: element.id,
+                    title: element.title,
+                    category: element.category,
+                    description: element.description,
+                    image: element.images[0],
+                    brand: element.brand,
+                    price: element.price,
+                    rating: element.rating
+                })
+            });
+
+        }
     }
 
     
@@ -31,7 +48,7 @@
     <div class='content-layout'>
         <Filter/>
 
-        <ItemLayout/>
+        <ItemLayout {productList}/>
     </div>
 
 </div>
